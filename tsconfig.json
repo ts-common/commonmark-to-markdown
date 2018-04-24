@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": ".",
+    "rootDir": ".",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "strictNullChecks": true
+  },
+  "files": ["test.ts", "index.ts"],
+  "include": ["*.ts"]
+}

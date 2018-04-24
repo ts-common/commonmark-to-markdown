@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "7"
+install:
+- npm install
+script:
+- npm run build
+- mkdir md-tests
+- cd ./md-tests && git clone https://github.com/Azure/azure-rest-api-specs
+- npm run test
