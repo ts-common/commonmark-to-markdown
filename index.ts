@@ -1,6 +1,4 @@
 import { Node } from "commonmark";
-import * as commonmark from "commonmark";
-import { readFileSync, writeFileSync } from "fs";
 
 export function commonmarkToString(root: Node) {
   let walker = root.walker();
@@ -9,11 +7,13 @@ export function commonmarkToString(root: Node) {
   while ((event = walker.next())) {
     let curNode = event.node;
 
-    if (!event.entering && render.leaving[curNode.type]) {
-      output += render.leaving[curNode.type](curNode, event.entering);
+    const leaving = render.leaving[curNode.type]
+    if (!event.entering && leaving !== undefined) {
+      output += leaving(curNode, event.entering);
     }
-    if (event.entering && render.entering[curNode.type]) {
-      output += render.entering[curNode.type](curNode, event.entering);
+    const entering = render.entering[curNode.type]
+    if (event.entering && entering !== undefined) {
+      output += entering(curNode, event.entering);
     }
   }
 
@@ -22,7 +22,22 @@ export function commonmarkToString(root: Node) {
   return output;
 }
 
-const render = {
+type Func = (node: Node, b: unknown) => unknown
+
+interface Render {
+  readonly entering: {
+    readonly [key: string]: Func|undefined
+  }
+  readonly leaving: {
+    readonly [key: string]: Func|undefined
+  }
+}
+
+// See this PR https://github.com/DefinitelyTyped/DefinitelyTyped/pull/28538
+// for more information.
+type ListType = "bullet"|"ordered"
+
+const render : Render = {
   entering: {
     text: (node: Node) => node.literal,
     softbreak: (node: Node) => "\n",
@@ -37,7 +52,7 @@ const render = {
     paragraph: (node: Node) => "",
     block_quote: (node: Node) => "> ",
     item: (node: Node) =>
-      `${{ bullet: "*", ordered: `1${node.listDelimiter}` }[node.listType]} `,
+      `${{ bullet: "*", ordered: `1${node.listDelimiter}` }[node.listType as ListType]} `,
     list: (node: Node) => "",
     heading: (node: Node) =>
       Array(node.level)
@@ -48,14 +63,13 @@ const render = {
     html_block: (node: Node) => node.literal,
     thematic_break: (node: Node) => "---\n\n",
     custom_inline: (node: Node) => {},
-    custom_block: (node: Node) => {}
+    custom_block: (node: Node) => {},
   },
 
   leaving: {
-    heading: (node: Node) => "\n\n",
     paragraph: (node: Node) => "\n\n",
     link: (node: Node) => `](${node.destination})`,
     strong: (node: Node) => "**",
-    emph: (node: Node) => "*"
+    emph: (node: Node) => "*",
   }
 };

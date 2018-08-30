@@ -5,9 +5,11 @@
     "sourceMap": true,
     "outDir": ".",
     "rootDir": ".",
+    "declaration": true,
     "jsx": "react",
+    "importHelpers": true,
     "moduleResolution": "node",
-    "strictNullChecks": true
+    "strict": true
   },
   "files": ["test.ts", "index.ts"],
   "include": ["*.ts"]
