@@ -1,6 +1,4 @@
 import { Node } from "commonmark";
-// import * as commonmark from "commonmark";
-// import { readFileSync, writeFileSync } from "fs";
 
 export function commonmarkToString(root: Node) {
   let walker = root.walker();
