@@ -32,7 +32,7 @@ function nodes(root: Node) {
   return nodes;
 }
 
-function testFile(path) {
+function testFile(path: string) {
   let reader = new commonmark.Parser();
 
   let parsed = reader.parse(readFileSync(path, "utf8")); // parsed is a 'Node' tree

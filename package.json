@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/billytrend/commonmark-to-markdown.git"
+    "url": "git+https://github.com/ts-common/commonmark-to-markdown.git"
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +19,9 @@
     "index.d.ts"
   ],
   "bugs": {
-    "url": "https://github.com/billytrend/commonmark-to-markdown/issues"
+    "url": "https://github.com/ts-common/commonmark-to-markdown/issues"
   },
-  "homepage": "https://github.com/billytrend/commonmark-to-markdown#readme",
+  "homepage": "https://github.com/ts-common/commonmark-to-markdown#readme",
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/commonmark": "^0.27.0",
