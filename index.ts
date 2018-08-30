@@ -57,6 +57,9 @@ interface Render {
 // for more information.
 type ListType = "bullet"|"ordered"
 
+const indent = (node: Node|null): string =>
+  node !== null ? indent(node.parent) + (node.type === "item" ? "  " : "") : ""
+
 const render : Render = {
   entering: {
     text: (node: Node) => node.literal,
@@ -72,7 +75,7 @@ const render : Render = {
     paragraph: (node: Node) => "",
     block_quote: (node: Node) => "> ",
     item: (node: Node) =>
-      `${{ bullet: "*", ordered: `1${node.listDelimiter}` }[node.listType as ListType]} `,
+      `${indent(node.parent)}${{ bullet: "*", ordered: `1${node.listDelimiter}` }[node.listType as ListType]} `,
     list: (node: Node) => "",
     heading: (node: Node) =>
       Array(node.level)
