@@ -35,6 +35,8 @@ interface Render {
   }
 }
 
+// See this PR https://github.com/DefinitelyTyped/DefinitelyTyped/pull/28538
+// for more information.
 type ListType = "bullet"|"ordered"
 
 const render : Render = {
@@ -63,14 +65,13 @@ const render : Render = {
     html_block: (node: Node) => node.literal,
     thematic_break: (node: Node) => "---\n\n",
     custom_inline: (node: Node) => {},
-    custom_block: (node: Node) => {}
+    custom_block: (node: Node) => {},
   },
 
   leaving: {
-    heading: (node: Node) => "\n\n",
     paragraph: (node: Node) => "\n\n",
     link: (node: Node) => `](${node.destination})`,
     strong: (node: Node) => "**",
-    emph: (node: Node) => "*"
+    emph: (node: Node) => "*",
   }
 };
