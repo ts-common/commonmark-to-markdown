@@ -1,5 +1,5 @@
 {
-  "name": "commonmark-to-markdown",
+  "name": "@ts-common/commonmark-to-markdown",
   "version": "1.0.1",
   "description": "Converts commonmark AST (back) to plain markdown",
   "main": "index.js",
