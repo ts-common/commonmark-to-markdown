@@ -16,7 +16,7 @@ export const parse = (fileContent: string): MarkDownEx => {
 }
 
 export const markDownExToString = (mde: MarkDownEx): string => {
-  const md = commonmarkToString(mde.markDown)
+  const md = unescape(commonmarkToString(mde.markDown))
   return mde.frontMatter === undefined ? md : `---\n${mde.frontMatter}\n---\n${md}`
 }
 
@@ -87,6 +87,7 @@ const render : Render = {
   },
 
   leaving: {
+    heading: (node: Node) => "\n\n",
     paragraph: (node: Node) => "\n\n",
     link: (node: Node) => `](${node.destination})`,
     strong: (node: Node) => "**",
