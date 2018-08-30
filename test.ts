@@ -1,11 +1,8 @@
-import * as commonmark from "commonmark";
-import { readFileSync, readdirSync } from "fs";
+import { readFileSync } from "fs";
 import { Node } from "commonmark";
 import { expect } from "chai";
-import { commonmarkToString } from ".";
-import { relative } from "path";
+import { parse, markDownExToString } from ".";
 import * as glob from "glob";
-var assert = require("assert");
 
 function nodes(root: Node) {
   let walker = root.walker();
@@ -33,12 +30,13 @@ function nodes(root: Node) {
 }
 
 function testFile(path: string) {
-  let reader = new commonmark.Parser()
+  const fileContent = readFileSync(path, "utf8")
+  const parsed = parse(fileContent)
+  const result = markDownExToString(parsed)
+  const reparse = parse(result)
 
-  let parsed = reader.parse(readFileSync(path, "utf8")); // parsed is a 'Node' tree
-  let reparse = reader.parse(unescape(commonmarkToString(parsed)));
-
-  expect(nodes(reparse)).to.eql(nodes(parsed));
+  expect(reparse.frontMatter).to.eql(parsed.frontMatter)
+  expect(nodes(reparse.markDown)).to.eql(nodes(parsed.markDown))
 }
 
 describe("#commonmarkToString()", function() {

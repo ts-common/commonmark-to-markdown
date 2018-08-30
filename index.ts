@@ -1,6 +1,26 @@
-import { Node } from "commonmark";
+import { Node, Parser } from "commonmark"
+import * as fm from "front-matter"
 
-export function commonmarkToString(root: Node) {
+export interface MarkDownEx {
+  readonly frontMatter?: string
+  readonly markDown: Node
+}
+
+export const parse = (fileContent: string): MarkDownEx => {
+  const result = fm(fileContent)
+  const parser = new Parser()
+  return {
+    frontMatter: result.frontmatter,
+    markDown: parser.parse(result.body)
+  }
+}
+
+export const markDownExToString = (mde: MarkDownEx): string => {
+  const md = commonmarkToString(mde.markDown)
+  return mde.frontMatter === undefined ? md : `---\n${mde.frontMatter}\n---\n${md}`
+}
+
+function commonmarkToString(root: Node) {
   let walker = root.walker();
   let event;
   let output = "";
