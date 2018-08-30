@@ -35,6 +35,8 @@ interface Render {
   }
 }
 
+type ListType = "bullet"|"ordered"
+
 const render : Render = {
   entering: {
     text: (node: Node) => node.literal,
@@ -50,7 +52,7 @@ const render : Render = {
     paragraph: (node: Node) => "",
     block_quote: (node: Node) => "> ",
     item: (node: Node) =>
-      `${{ Bullet: "*", Ordered: `1${node.listDelimiter}` }[node.listType]} `,
+      `${{ bullet: "*", ordered: `1${node.listDelimiter}` }[node.listType as ListType]} `,
     list: (node: Node) => "",
     heading: (node: Node) =>
       Array(node.level)
