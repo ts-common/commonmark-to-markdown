@@ -9,11 +9,19 @@
     "build": "tsc",
     "prepack": "npm install && tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billytrend/commonmark-to-markdown.git"
+  },
   "author": "",
   "license": "ISC",
   "files": [
     "index.d.ts"
   ],
+  "bugs": {
+    "url": "https://github.com/billytrend/commonmark-to-markdown/issues"
+  },
+  "homepage": "https://github.com/billytrend/commonmark-to-markdown#readme",
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/commonmark": "^0.27.0",
