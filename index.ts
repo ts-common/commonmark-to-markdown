@@ -53,10 +53,6 @@ interface Render {
   }
 }
 
-// See this PR https://github.com/DefinitelyTyped/DefinitelyTyped/pull/28538
-// for more information.
-type ListType = "bullet"|"ordered"
-
 const indent = (node: Node|null): string =>
   node !== null ? indent(node.parent) + (node.type === "item" ? "  " : "") : ""
 
@@ -75,7 +71,7 @@ const render : Render = {
     paragraph: (node: Node) => "",
     block_quote: (node: Node) => "> ",
     item: (node: Node) =>
-      `${indent(node.parent)}${{ bullet: "*", ordered: `1${node.listDelimiter}` }[node.listType as ListType]} `,
+      `${indent(node.parent)}${{ bullet: "*", ordered: `1${node.listDelimiter}` }[node.listType]} `,
     list: (node: Node) => "",
     heading: (node: Node) =>
       Array(node.level)
