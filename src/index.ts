@@ -13,7 +13,9 @@ export type NodeType =
 
 export const createNode = (type: NodeType, ...children: cm.Node[]) => {
   const result = new cm.Node(type)
-  children.forEach(result.appendChild)
+  for (const c of children) {
+    result.appendChild(c)
+  }
   return result
 }
 
