@@ -3,14 +3,12 @@
     "target": "es6",
     "module": "commonjs",
     "sourceMap": true,
-    "outDir": ".",
-    "rootDir": ".",
+    "declarationMap": true,
+    "outDir": "./dist",
     "declaration": true,
     "jsx": "react",
     "importHelpers": true,
     "moduleResolution": "node",
     "strict": true
-  },
-  "files": ["test.ts", "index.ts"],
-  "include": ["*.ts"]
+  }
 }

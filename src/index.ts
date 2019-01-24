@@ -1,10 +1,19 @@
 import { Node, Parser } from "commonmark"
 import * as fm from "front-matter"
+import * as it from "@ts-common/iterator"
 
 export interface MarkDownEx {
   readonly frontMatter?: string
   readonly markDown: Node
 }
+
+export const iterate = (node: Node) => it.iterable(function *() {
+  let c = node.firstChild
+  while (c !== null) {
+    yield c
+    c = c.next
+  }
+})
 
 export const parse = (fileContent: string): MarkDownEx => {
   const result = fm(fileContent)
