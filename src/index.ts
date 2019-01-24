@@ -78,10 +78,10 @@ type Func = (node: cm.Node, b: unknown) => unknown
 
 interface Render {
   readonly entering: {
-    readonly [key: string]: Func|undefined
+    readonly [key in NodeType]?: Func
   }
   readonly leaving: {
-    readonly [key: string]: Func|undefined
+    readonly [key in NodeType]?: Func
   }
 }
 
