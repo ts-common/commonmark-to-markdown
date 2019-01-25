@@ -41,6 +41,6 @@
     "@ts-common/iterator": "^0.1.2",
     "@types/commonmark": "^0.27.1",
     "commonmark": "^0.28.1",
-    "front-matter": "^2.3.0"
+    "front-matter": "^3.0.1"
   }
 }
