@@ -7,6 +7,7 @@ export interface MarkDownEx {
   readonly markDown: cm.Node
 }
 
+// see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/32460/files
 export type NodeType =
   'text' | 'softbreak' | 'linebreak' | 'emph' | 'strong' | 'html_inline' | 'link' | 'image' | 'code' | 'document' | 'paragraph' |
   'block_quote' | 'item' | 'list' | 'heading' | 'code_block' | 'html_block' | 'thematic_break' | 'custom_inline' | 'custom_block'
