@@ -9,7 +9,7 @@ export interface MarkDownEx {
 
 export type NodeType = cm.NodeType
 
-export const createNode = (type: NodeType, ...children: cm.Node[]) => {
+export const createNode = (type: NodeType, ...children: readonly cm.Node[]) => {
   const result = new cm.Node(type)
   for (const c of children) {
     result.appendChild(c)
@@ -52,7 +52,7 @@ export const markDownExToString = (mde: MarkDownEx): string => {
   return mde.frontMatter === undefined ? md : `---\n${mde.frontMatter}\n---\n${md}`
 }
 
-function commonmarkToString(root: cm.Node) {
+const commonmarkToString = (root: cm.Node) => {
   let walker = root.walker();
   let event;
   let output = "";
