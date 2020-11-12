@@ -1,6 +1,6 @@
 import * as cm from "commonmark"
-import * as fm from "front-matter"
 import * as it from "@ts-common/iterator"
+var fm = require('front-matter')
 
 export interface MarkDownEx {
   readonly frontMatter?: string
